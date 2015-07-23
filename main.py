@@ -9,12 +9,17 @@ from google.appengine.api import users
 # Note: We don't need to call run() since our application is embedded within
 # the App Engine WSGI application server.
 
+@app.route('/login')
+@login_required
+def login():
+	return 'Successfully Logged In!'
 
 @app.route('/home')
+@login_required
 def hello():
     """Return a friendly HTTP greeting."""
-    plays = Play.all()
-    logout_url = users.create_logout_url('/')
+    plays = filter(lambda p: p.user == users.get_current_user(), Play.all())
+    logout_url = users.create_logout_url('/home')
     logout_url_linktext = 'Logout'
     login_url = users.create_login_url('/home')
     login_url_linktext = 'Login'
