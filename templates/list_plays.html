@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<ul>
+    {% for play in plays %}
+    <li>
+        {{ play.title }} by {{play.artist}} on {{play.album}} at {{play.time}} (logged by {{ play.user.nickname() }})
+    </li>
+    {% endfor %}
+</ul>
+<a href="{{ logout_url|safe }}">{{ logout_url_linktext }}</a>
+<a href="{{ login_url|safe }}">{{ login_url_linktext }}</a>
+{% endblock %}
