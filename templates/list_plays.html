@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
-{% block content %}
-<ul>
+{% block plays_list %}
+<ul class="list-group">
     {% for play in plays %}
     <li>
         {{ play.title }} by {{play.artist}} on {{play.album}} at {{play.time}} (logged by {{ play.user.nickname() }})

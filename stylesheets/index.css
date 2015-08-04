@@ -1,0 +1,14 @@
+.parent {
+  margin: 0 auto;
+  width: 40%;
+  text-align: center
+}
+
+#child {
+  text-align: center;
+}
+
+#child p {
+  text-align: left;
+  margin-left: 30%;
+}

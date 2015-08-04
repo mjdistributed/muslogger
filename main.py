@@ -19,6 +19,7 @@ def login():
 def hello():
     """Return a friendly HTTP greeting."""
     plays = filter(lambda p: p.user == users.get_current_user(), Play.all())
+    print(plays)
     logout_url = users.create_logout_url('/home')
     logout_url_linktext = 'Logout'
     login_url = users.create_login_url('/home')
@@ -30,7 +31,6 @@ def hello():
 @login_required
 def log():
 	""" Log a play """
-	print("here")
 	# play = Play(artist = "Artist", album_artist = "Album Artist", album = "Album", title = "Title", user = users.get_current_user())
 	play = Play(artist=request.form['artist'],
 		album_artist=request.form['album_artist'],
@@ -40,6 +40,15 @@ def log():
 	play.put()
 	# flash('Play saved on database.')
 	return "Success"
+
+
+@app.route('/dummy')
+@login_required
+def dummy():
+	""" Debugging page for creating a dummy play """
+	play = Play(artist = "Artist", album_artist = "Album Artist", album = "Album", title = "Title", user = users.get_current_user())
+	play.put()
+	return "Success"	
 
 
 
