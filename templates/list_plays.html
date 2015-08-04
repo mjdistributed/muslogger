@@ -1,13 +1,31 @@
 {% extends "base.html" %}
 
 {% block plays_list %}
-<ul class="list-group">
-    {% for play in plays %}
-    <li>
-        {{ play.title }} by {{play.artist}} on {{play.album}} at {{play.time}} (logged by {{ play.user.nickname() }})
-    </li>
-    {% endfor %}
-</ul>
+
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>date</th>
+				<th>title</th>
+				<th>artist</th>
+				<th>album</th>
+				<th>user</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for play in plays %}
+			<tr>
+			  <th>{{play.time}}</th>
+			  <td>{{ play.title }}</td>
+			  <td>{{play.artist}}</td>
+			  <td>{{play.album}}</td>
+			  <td>{{ play.user.nickname() }}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
 <a href="{{ logout_url|safe }}">{{ logout_url_linktext }}</a>
+|
 <a href="{{ login_url|safe }}">{{ login_url_linktext }}</a>
 {% endblock %}
