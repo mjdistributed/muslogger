@@ -38,6 +38,7 @@ def log():
 		title=request.form['title'],
 		user=users.get_current_user())
 	play.put()
+	print("logged song")
 	# flash('Play saved on database.')
 	return "Success"
 

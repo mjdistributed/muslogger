@@ -15,8 +15,8 @@
 		<tbody>
 			{% for play in plays %}
 			<tr>
-			  <th>{{play.time}}</th>
-			  <td>{{ play.title }}</td>
+			  <th>{{play.time.date()}} {{play.time.hour}}:{{"{:0>2d}".format(play.time.minute)}}</th>
+			  <td>{{play.title}}</td>
 			  <td>{{play.artist}}</td>
 			  <td>{{play.album}}</td>
 			  <td>{{ play.user.nickname() }}</td>
