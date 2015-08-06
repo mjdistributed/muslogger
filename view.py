@@ -14,18 +14,7 @@ from google.appengine.api import users
 def login():
 	return 'Successfully Logged In!'
 
-@app.route('/home')
-@login_required
-def hello():
-    """Return a friendly HTTP greeting."""
-    plays = filter(lambda p: p.user == users.get_current_user(), Play.all())
-    print(plays)
-    logout_url = users.create_logout_url('/home')
-    logout_url_linktext = 'Logout'
-    login_url = users.create_login_url('/home')
-    login_url_linktext = 'Login'
-    plays = sorted(plays, key=lambda x: x.time)
-    return render_template('list_plays.html', plays=plays, logout_url=logout_url, logout_url_linktext=logout_url_linktext, login_url=login_url, login_url_linktext=login_url_linktext)
+
 
 @app.route('/log', methods = ['POST'])
 @login_required
@@ -51,6 +40,19 @@ def dummy():
 	play.put()
 	return "Success"	
 
+
+@app.route('/')
+@login_required
+def hello():
+    """Return a friendly HTTP greeting."""
+    plays = filter(lambda p: p.user == users.get_current_user(), Play.all())
+    print(plays)
+    logout_url = users.create_logout_url('/home')
+    logout_url_linktext = 'Logout'
+    login_url = users.create_login_url('/home')
+    login_url_linktext = 'Login'
+    plays = sorted(plays, key=lambda x: x.time)
+    return render_template('list_plays.html', plays=plays, logout_url=logout_url, logout_url_linktext=logout_url_linktext, login_url=login_url, login_url_linktext=login_url_linktext)
 
 
 @app.errorhandler(404)
