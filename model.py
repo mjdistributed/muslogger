@@ -5,5 +5,6 @@ class Play(db.Model):
 	album_artist = db.StringProperty(required = True)
 	album = db.StringProperty(required = True)
 	title = db.StringProperty(required = True)
-	time = db.DateTimeProperty(auto_now_add = True)
+	time = db.DateTimeProperty(auto_now_add = True) # in UTC
+	timezone = db.StringProperty()
 	user = db.UserProperty(required = True)

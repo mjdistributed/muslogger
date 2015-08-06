@@ -4,7 +4,7 @@ from model import Play
 from flask import render_template
 from decorators import login_required
 from google.appengine.api import users
-
+import datetime
 
 # Note: We don't need to call run() since our application is embedded within
 # the App Engine WSGI application server.
@@ -25,6 +25,7 @@ def log():
 		album_artist=request.form['album_artist'],
 		album=request.form['album'],
 		title=request.form['title'],
+		timezone=request.form['tz'],
 		user=users.get_current_user())
 	play.put()
 	print("logged song")
@@ -38,6 +39,9 @@ def dummy():
 	""" Debugging page for creating a dummy play """
 	play = Play(artist = "Artist", album_artist = "Album Artist", album = "Album", title = "Title", user = users.get_current_user())
 	play.put()
+	print(datetime.datetime.now())
+	print(play.time)
+	print(play.time.hour)
 	return "Success"	
 
 
